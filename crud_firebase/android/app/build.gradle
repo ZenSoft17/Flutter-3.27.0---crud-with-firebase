@@ -1,0 +1,53 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // El plugin de Flutter debe aplicarse después de los plugins de Android y Kotlin.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.test.crud_firebase"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        // Especifica tu propio ID de aplicación único (https://developer.android.com/studio/build/application-id.html).
+        applicationId = "com.test.crud_firebase"
+        // Puedes actualizar los valores siguientes para que coincidan con las necesidades de tu aplicación.
+        minSdk = 23
+        multiDexEnabled = true
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    buildTypes {
+        release {
+            // Agrega tu propia configuración de firma para la versión de release.
+            signingConfig = signingConfigs.debug  // Para debugging, asegúrate de configurar esto antes de la publicación.
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.google.firebase:firebase-auth:21.0.1'  // Para Firebase Authentication
+    implementation 'com.google.firebase:firebase-firestore:24.0.0'  // Para Firestore
+    implementation 'com.google.firebase:firebase-core:21.1.0'  // Para Firebase Core
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0"  // Dependencia de Kotlin para evitar conflictos
+}
+
+flutter {
+    source = "../.."
+}
+
+// Aplica el plugin de Google Services
+apply plugin: 'com.google.gms.google-services'
